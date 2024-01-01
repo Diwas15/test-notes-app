@@ -3,6 +3,8 @@ const app = express();
 import Messages from './notesDB.js';
 import cors from 'cors'
 
+const PORT = process.env.PORT||9000;
+
 //db connection
 import mongoose from 'mongoose';
 const url='mongodb+srv://satidiwas:TR49G"We(YUEyQ4@cluster0.is8pr7k.mongodb.net/Note-Taking?retryWrites=true&w=majority';
@@ -43,6 +45,6 @@ app.post('/notes/add',(req,res)=>{
 
 
 //listening port
-app.listen(9000,()=>{
-    console.log('connected to server at port 9000');
+app.listen(PORT, '0.0.0.0', function(err) {
+  console.log("Started listening on %s", PORT);
 });
