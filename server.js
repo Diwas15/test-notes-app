@@ -17,7 +17,7 @@ app.use(cors());
 
 app.use((req,res,next)=>{
     res.setHeader("Access-Control-Allow-Origin","same-origin-allow-popups");
-    res.setHeader("Access-Control-Allow-Headers","*");
+    res.setHeader("Access-Control-Allow-Headers","true");
     next();
 })
 
