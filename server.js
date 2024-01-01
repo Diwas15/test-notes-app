@@ -31,7 +31,7 @@ app.get('/',(req,res)=>{
 app.post('/notes/new',(req,res)=>{
         const email=req.body.user;
         const data = Messages.find({user_email:email}).exec()
-        .then((data)=>res.status(200).send("bhai server to chlra hai"))
+        .then((data)=>res.status(200).send(data))
         .catch((e)=>console.log("lo error aa  gaya"));
 });
 
