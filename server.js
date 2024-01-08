@@ -37,12 +37,28 @@ app.post('/notes/new',(req,res)=>{
 
 app.post('/notes/add',(req,res)=>{
     const newMessage = req.body;
-    console.log("this is"+JSON.stringify(newMessage))
-    //console.log("this is "+JSON.stringify(newMessage));
     Messages.create(newMessage).then(res.status(201).send('database updated successfully'))
     .catch((e)=>res.status(501).send(e));
 })
 
+app.delete('/notes/delete',(req,res)=>{
+    const usid=req.body.user_id;
+    Messages.deleteOne({_id:usid}).then(res.status(200).send())
+    .catch((e)=>res.status(501).send(e));
+})
+
+app.put('/notes/update',(req,res)=>{
+    const doc_id=req.body._id;
+    const n_body=req.body.new_body;
+    const email=req.body.email;
+    Messages.findOneAndUpdate({_id:doc_id},{body:n_body}).then(()=>{
+        console.log("update to kiya hai")
+        Messages.find({user_email:email}).exec()
+        .then((data)=>res.status(200).send(data))
+        .catch((e)=>console.log(e));
+    })
+    .catch(e=>console.log(e));
+})
 
 //listening port
 app.listen(PORT, '0.0.0.0', function(err) {
